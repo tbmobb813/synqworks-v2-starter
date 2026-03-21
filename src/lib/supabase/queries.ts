@@ -26,14 +26,14 @@ export async function fetchSkills(): Promise<Skill[]> {
 // USER PROGRESS
 // ============================================
 
-export async function fetchUserProgress(userId: string): Promise<UserProgress[]> {
+export async function fetchUserProgress(userId: string): Promise<any[]> {
   const { data, error } = await supabase
     .from('user_progress')
     .select('*')
     .eq('user_id', userId)
 
   if (error) throw error
-  return data
+  return data as any[]
 }
 
 export async function upsertUserProgress(

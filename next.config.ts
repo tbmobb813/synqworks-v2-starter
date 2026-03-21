@@ -8,9 +8,7 @@ const nextConfig: NextConfig = {
   },
 
   // Same for ESLint
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
+  // ESLint config removed — Next.js no longer supports `eslint` here.
 
   // Enable React strict mode for better development warnings
   reactStrictMode: true,
