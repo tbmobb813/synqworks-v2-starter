@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { getNextModule } from '@/lib/engine/getNextModule'
 import type { DashboardData, RadarDataPoint, UserProgress } from '@/types'
 
 export async function GET() {
+  const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {

@@ -10,6 +10,7 @@
     "types:gen": "sh -c 'set -a && . ./.env.local && set +a && ref=$(echo $NEXT_PUBLIC_SUPABASE_URL | sed -E \"s~https?://([^.]+)\\..*~\\1~\") && npx supabase gen types typescript --project-id $ref --schema public > src/types/supabase.ts'"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.99.3",
     "@tanstack/react-query": "^5.90.11",
     "@vercel/analytics": "^2.0.1",

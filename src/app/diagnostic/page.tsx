@@ -57,7 +57,7 @@ export default function DiagnosticPage() {
 
         setPhase('done')
       } catch (err) {
-        console.error('Failed to save assessment:', err)
+        console.error('Failed to save assessment:', err instanceof Error ? err.message : JSON.stringify(err))
         setPhase('done') // Still redirect even on save failure
       }
     }

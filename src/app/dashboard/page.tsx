@@ -1,10 +1,11 @@
-import { supabase } from '@/lib/supabase/client'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { getNextModule } from '@/lib/engine/getNextModule'
 import DashboardClient from '@/components/dashboard/DashboardClient'
 import type { DashboardData, RadarDataPoint, UserProgress } from '@/types'
 
 async function getDashboardData(): Promise<DashboardData | null> {
   try {
+    const supabase = await createSupabaseServerClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return null
 
