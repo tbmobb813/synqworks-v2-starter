@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { getNextModule } from '@/lib/engine/getNextModule'
-import type { DashboardData, RadarDataPoint, UserProgress } from '@/types'
+import { buildRadarData } from '@/lib/engine/buildRadarData'
+import type { DashboardData, Skill, UserProgress } from '@/types'
 
 export async function GET() {
   const supabase = await createSupabaseServerClient()
@@ -19,17 +20,9 @@ export async function GET() {
   const userProgress = (progressRows.data ?? []) as UserProgress[]
   const skills = skillsRows.data ?? []
 
-  const radar_data: RadarDataPoint[] = skills.map((skill) => {
-    const progress = userProgress.find((p) => p.skill_id === skill.id)
-    return {
-      subject: skill.name,
-      score: progress?.competency_score ?? 0,
-      full_mark: 100,
-      skill_id: skill.id,
-    }
-  })
+  const radar_data = buildRadarData(skills as Skill[], userProgress)
 
-  const recommended_module = await getNextModule(user.id, userProgress)
+  const recommended_module = await getNextModule(user.id, userProgress, supabase)
 
   const sortedByScore = [...userProgress].sort((a, b) => a.competency_score - b.competency_score)
   const criticalGap = sortedByScore[0]

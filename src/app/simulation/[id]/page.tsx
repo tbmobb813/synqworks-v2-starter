@@ -127,7 +127,7 @@ export default function SimulationPage() {
     }
 
     buildAAR().catch(console.error)
-  }, [is_complete])
+  }, [is_complete, user])
 
   if (loading) {
     return (
