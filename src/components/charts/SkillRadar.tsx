@@ -16,7 +16,7 @@ interface SkillRadarProps {
   isLoading?: boolean
 }
 
-const CustomTooltip = ({ active, payload }: any) => {
+const CustomTooltip = ({ active, payload }: unknown) => {
   if (!active || !payload?.length) return null
   const d = payload[0].payload as RadarDataPoint
   return (
@@ -33,7 +33,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 export function SkillRadar({ data, isLoading }: SkillRadarProps) {
   if (isLoading) {
     return (
-      <div className="w-full h-[380px] flex items-center justify-center">
+      <div className="w-full h-95 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-2 border-zinc-200 border-t-emerald-500 rounded-full animate-spin" />
           <span className="text-xs font-mono text-zinc-400 tracking-widest uppercase">
