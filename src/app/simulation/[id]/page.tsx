@@ -89,7 +89,7 @@ export default function SimulationPage() {
 
       // Update user progress for this skill
       const pointsGained = Math.round(xpEarned / 10)
-      const userProgress = await fetchUserProgress(user.id)
+      const userProgress = (await fetchUserProgress(user.id)) as any[]
       const currentProgress = userProgress.find(p => p.skill_id === scenario.skill_id)
       const newScore = Math.min(100, (currentProgress?.competency_score ?? 0) + pointsGained)
       await upsertUserProgress(user.id, scenario.skill_id, newScore)

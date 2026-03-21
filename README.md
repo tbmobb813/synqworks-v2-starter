@@ -1,26 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 # SynqWorks v2 Starter
 
@@ -64,10 +41,9 @@ cp .env.example .env.local
 ```
 
 Fill in:
-```
+
 NEXT_PUBLIC_SUPABASE_URL=your_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-```
 
 ### 4. Generate TypeScript types
 
@@ -86,7 +62,6 @@ npm run dev
 
 ## Project structure
 
-```
 src/
 ├── app/                  # Next.js App Router pages
 │   ├── dashboard/        # Skill radar + recommended module
@@ -106,7 +81,6 @@ src/
 │   └── store/            # Zustand: useSimStore, useUserStore
 └── types/
     └── index.ts          # All app-wide TypeScript interfaces
-```
 
 ## Adapting for a new SynqWorks product
 
