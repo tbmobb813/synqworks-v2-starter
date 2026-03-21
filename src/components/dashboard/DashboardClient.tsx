@@ -9,23 +9,22 @@ import type { DashboardData } from '@/types'
 
 export default function DashboardClient({ initialData }: { initialData: DashboardData | null }) {
   const router = useRouter()
-  const [data, setData] = useState<DashboardData | null>(initialData)
+  const [data] = useState<DashboardData | null>(initialData)
 
-  const queryOptions: any = {
+  const { data: queryData, isLoading, error } = useQuery<DashboardData | null>({
     queryKey: ['dashboard'],
     queryFn: async () => {
       const res = await fetch('/api/recommend')
+      if (res.status === 401) return null
       if (!res.ok) throw new Error('Failed to load')
       return res.json() as Promise<DashboardData>
     },
     initialData: data ?? undefined,
-    onSuccess: (d: DashboardData) => setData(d),
     staleTime: 1000 * 60 * 5,
-  }
+    retry: false,
+  })
 
-  const { data: queryData, isLoading, error } = useQuery(queryOptions)
-
-  const useData = (queryData ?? data) as DashboardData | null
+  const useData = queryData ?? data
 
   if (error) return <div className="min-h-screen flex items-center justify-center"><p className="text-sm font-mono text-rose-500">Failed to load dashboard.</p></div>
 

@@ -96,15 +96,23 @@ export default function DiagnosticPage() {
             competency blueprint.
           </p>
           <button
-            onClick={() => setPhase('questions')}
-            className="
-              inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-700
+            onClick={() => questions.length > 0 && setPhase('questions')}
+            disabled={questions.length === 0}
+            className={`
+              inline-flex items-center gap-2
               text-white px-8 py-4 rounded-lg text-xs font-mono font-bold
-              uppercase tracking-widest transition-all duration-150 cursor-pointer
-            "
+              uppercase tracking-widest transition-all duration-150
+              ${questions.length > 0
+                ? 'bg-zinc-900 hover:bg-zinc-700 cursor-pointer'
+                : 'bg-zinc-100 text-zinc-400 cursor-not-allowed'
+              }
+            `}
           >
             Begin assessment
           </button>
+          {questions.length === 0 && (
+            <p className="text-sm text-zinc-400 mt-4">No questions available right now.</p>
+          )}
           <p className="text-[10px] font-mono text-zinc-400 mt-4">
             ~{Math.ceil(questions.length * 0.75)} minutes
           </p>
@@ -131,6 +139,15 @@ export default function DiagnosticPage() {
 
   // --- Questions ---
   const currentQuestion = questions[currentIdx]
+  if (!currentQuestion) {
+    return (
+      <div className="min-h-screen bg-zinc-50 flex items-center justify-center px-6 py-12">
+        <div className="text-center">
+          <p className="text-sm text-zinc-500">No question found. Returning to intro...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-zinc-50 flex items-center justify-center px-6 py-12">

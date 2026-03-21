@@ -16,7 +16,7 @@ interface SkillRadarProps {
   isLoading?: boolean
 }
 
-const CustomTooltip = ({ active, payload }: unknown) => {
+const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: { payload: RadarDataPoint }[] }) => {
   if (!active || !payload?.length) return null
   const d = payload[0].payload as RadarDataPoint
   return (
