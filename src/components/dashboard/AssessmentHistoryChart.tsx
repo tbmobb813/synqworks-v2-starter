@@ -44,10 +44,10 @@ export default function AssessmentHistoryChart({ history }: { history: Assessmen
           return (
             <div key={point.completed_at} className="flex-1 flex flex-col items-center gap-1">
               <span className="text-[9px] font-mono text-zinc-500">{point.avg_score}</span>
-              <div className="w-full flex items-end" style={{ height: '80px' }}>
+              <div className="w-full flex items-end chart-bar-container">
                 <div
-                  className={`w-full rounded-t transition-all ${isLatest ? 'bg-emerald-500' : 'bg-zinc-200'}`}
-                  style={{ height: `${heightPct}%`, minHeight: '4px' }}
+                  className={`w-full rounded-t transition-all chart-bar ${isLatest ? 'bg-emerald-500' : 'bg-zinc-200'}`}
+                  style={{ '--bar-h': `${heightPct}%` } as React.CSSProperties}
                 />
               </div>
               <span className="text-[8px] font-mono text-zinc-400">{formatDate(point.completed_at)}</span>

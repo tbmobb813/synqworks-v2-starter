@@ -46,7 +46,7 @@ export default function CertificationProgressCard({ certifications }: { certific
               {/* Progress bar */}
               <div className="flex items-center gap-3 mb-3">
                 <div className="flex-1 h-2 bg-white/60 rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full transition-all ${colors.bar}`} style={{ width: `${cert.percent_complete}%` }} />
+                  <div className={`h-full rounded-full transition-all bar-fill ${colors.bar}`} style={{ '--bar-w': `${cert.percent_complete}%` } as React.CSSProperties} />
                 </div>
                 <span className={`text-xs font-mono font-bold ${colors.text}`}>{cert.percent_complete}%</span>
               </div>

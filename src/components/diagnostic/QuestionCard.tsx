@@ -54,8 +54,8 @@ export function QuestionCard({
         </div>
         <div className="h-0.5 w-full bg-zinc-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-emerald-500 rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${progress}%` }}
+            className="h-full bg-emerald-500 rounded-full transition-all duration-500 ease-out bar-fill"
+            style={{ '--bar-w': `${progress}%` } as React.CSSProperties}
           />
         </div>
       </div>

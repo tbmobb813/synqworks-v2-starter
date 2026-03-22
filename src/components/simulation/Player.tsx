@@ -36,8 +36,8 @@ function MetricBar({ icon, label, value, color, textColor }: MetricBarProps) {
       </div>
       <div className="h-1 w-full bg-zinc-100 rounded-full overflow-hidden">
         <div
-          className={`h-full ${barColor} rounded-full transition-all duration-700 ease-out`}
-          style={{ width: `${value}%` }}
+          className={`h-full ${barColor} rounded-full transition-all duration-700 ease-out bar-fill`}
+          style={{ '--bar-w': `${value}%` } as React.CSSProperties}
         />
       </div>
     </div>

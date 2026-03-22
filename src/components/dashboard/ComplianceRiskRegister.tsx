@@ -31,7 +31,7 @@ export default function ComplianceRiskRegister({ risks }: { risks: RiskSkill[] }
             </div>
             <div className="flex items-center gap-2">
               <div className="w-20 h-1.5 bg-rose-200 rounded-full overflow-hidden">
-                <div className="h-full bg-rose-500 rounded-full" style={{ width: `${risk.score}%` }} />
+                <div className="h-full bg-rose-500 rounded-full bar-fill" style={{ '--bar-w': `${risk.score}%` } as React.CSSProperties} />
               </div>
               <span className="text-xs font-mono font-bold text-rose-700 w-8 text-right">{risk.score}</span>
               <span className="text-[9px] font-mono bg-rose-200 text-rose-800 px-1.5 py-0.5 rounded uppercase font-bold">

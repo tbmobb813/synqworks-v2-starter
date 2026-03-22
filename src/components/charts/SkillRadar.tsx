@@ -74,7 +74,7 @@ export function SkillRadar({ data, isLoading }: SkillRadarProps) {
 
   return (
     <div className="w-full">
-      <div style={{ width: '100%', height: 420 }}>
+      <div className="radar-container">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={data} margin={{ top: 48, right: 64, bottom: 48, left: 64 }}>
             <PolarGrid

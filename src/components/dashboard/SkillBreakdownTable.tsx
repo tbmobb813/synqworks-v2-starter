@@ -47,7 +47,7 @@ export default function SkillBreakdownTable({ skills }: { skills: SkillBreakdown
     return sortAsc ? cmp : -cmp
   })
 
-  const SortIcon = ({ col }: { col: SortKey }) => {
+  const sortIcon = (col: SortKey) => {
     if (sortKey !== col) return null
     return sortAsc ? <ChevronUp size={12} /> : <ChevronDown size={12} />
   }
@@ -61,13 +61,13 @@ export default function SkillBreakdownTable({ skills }: { skills: SkillBreakdown
         <thead>
           <tr className="border-t border-zinc-100">
             <th className="text-left px-5 py-2 text-[10px] font-mono text-zinc-400 uppercase tracking-widest cursor-pointer select-none" onClick={() => handleSort('skill_name')}>
-              <span className="flex items-center gap-1">Skill <SortIcon col="skill_name" /></span>
+              <span className="flex items-center gap-1">Skill {sortIcon('skill_name')}</span>
             </th>
             <th className="text-left px-5 py-2 text-[10px] font-mono text-zinc-400 uppercase tracking-widest cursor-pointer select-none" onClick={() => handleSort('score')}>
-              <span className="flex items-center gap-1">Score <SortIcon col="score" /></span>
+              <span className="flex items-center gap-1">Score {sortIcon('score')}</span>
             </th>
             <th className="text-right px-5 py-2 text-[10px] font-mono text-zinc-400 uppercase tracking-widest cursor-pointer select-none" onClick={() => handleSort('risk_level')}>
-              <span className="flex items-center gap-1 justify-end">Status <SortIcon col="risk_level" /></span>
+              <span className="flex items-center gap-1 justify-end">Status {sortIcon('risk_level')}</span>
             </th>
           </tr>
         </thead>
@@ -81,7 +81,7 @@ export default function SkillBreakdownTable({ skills }: { skills: SkillBreakdown
               <td className="px-5 py-3">
                 <div className="flex items-center gap-3">
                   <div className="w-24 h-1.5 bg-zinc-100 rounded-full overflow-hidden">
-                    <div className={`h-full rounded-full ${BAR_COLORS[skill.risk_level]}`} style={{ width: `${skill.score}%` }} />
+                    <div className={`h-full rounded-full bar-fill ${BAR_COLORS[skill.risk_level]}`} style={{ '--bar-w': `${skill.score}%` } as React.CSSProperties} />
                   </div>
                   <span className="text-xs font-mono text-zinc-600 w-6 text-right">{skill.score}</span>
                 </div>

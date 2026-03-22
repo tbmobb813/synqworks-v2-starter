@@ -24,7 +24,7 @@ export default function EnterpriseComingSoon() {
   return (
     <div className="relative bg-white border border-zinc-200 rounded-xl p-6 overflow-hidden">
       {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-50/40 via-transparent to-blue-50/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-violet-50/40 via-transparent to-blue-50/40 pointer-events-none" />
 
       <div className="relative">
         <div className="flex items-center justify-between mb-5">
