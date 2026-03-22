@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import type { Database } from '@/types/supabase'
 
-export async function createSupabaseServerClient() {
+export async function createClient() {
   const cookieStore = await cookies()
 
   return createServerClient<Database>(
@@ -19,7 +19,8 @@ export async function createSupabaseServerClient() {
               cookieStore.set(name, value, options)
             )
           } catch {
-            // setAll called from a Server Component — cookies will be set by middleware
+            // setAll called from a Server Component — safe to ignore
+            // middleware handles session refresh
           }
         },
       },

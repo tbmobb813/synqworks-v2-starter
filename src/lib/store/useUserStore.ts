@@ -1,33 +1,31 @@
-'use client'
-
 import { create } from 'zustand'
-import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
+import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
 
 interface UserStore {
   user: User | null
-  loading: boolean
-  init: () => Promise<void>
+  isLoading: boolean
+  fetchUser: () => Promise<void>
   signOut: () => Promise<void>
 }
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
-  loading: true,
+  isLoading: true,
 
-  init: async () => {
-    const supabase = createSupabaseBrowserClient()
-
+  fetchUser: async () => {
+    const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
-    set({ user, loading: false })
+    set({ user, isLoading: false })
 
+    // Subscribe to auth changes so the store stays in sync
     supabase.auth.onAuthStateChange((_event, session) => {
-      set({ user: session?.user ?? null })
+      set({ user: session?.user ?? null, isLoading: false })
     })
   },
 
   signOut: async () => {
-    const supabase = createSupabaseBrowserClient()
+    const supabase = createClient()
     await supabase.auth.signOut()
     set({ user: null })
   },
