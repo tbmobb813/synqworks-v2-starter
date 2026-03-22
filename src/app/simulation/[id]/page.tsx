@@ -10,9 +10,10 @@ import {
   fetchScenarioById,
   saveSimulationResult,
   fetchUserProgress,
+  upsertUserProgress,
 } from '@/lib/supabase/queries'
 import { getNextModule } from '@/lib/engine/getNextModule'
-import { upsertUserProgress } from '@/lib/supabase/queries'
+import { supabase } from '@/lib/supabase/client'
 import type { SimulationScenario, AARData } from '@/types'
 
 export default function SimulationPage() {
@@ -98,7 +99,7 @@ export default function SimulationPage() {
       const updatedProgress = userProgress.map(p =>
         p.skill_id === scenario.skill_id ? { ...p, competency_score: newScore } : p
       )
-      const nextModule = await getNextModule(user.id, updatedProgress)
+      const nextModule = await getNextModule(user.id, updatedProgress, supabase)
 
       // Save simulation result
       await saveSimulationResult(

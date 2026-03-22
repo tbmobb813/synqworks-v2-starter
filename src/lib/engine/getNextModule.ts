@@ -1,4 +1,3 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { RecommendedModule, UserProgress } from '@/types'
 
@@ -17,11 +16,11 @@ import type { RecommendedModule, UserProgress } from '@/types'
 export async function getNextModule(
   userId: string,
   userProgress: UserProgress[],
-  client?: SupabaseClient
+  client: SupabaseClient
 ): Promise<RecommendedModule | null> {
   if (userProgress.length === 0) return null
 
-  const db = client ?? await createSupabaseServerClient()
+  const db = client
 
   // Step 1: Find the critical gap (lowest scoring skill)
   const criticalGap = [...userProgress].sort(
@@ -37,7 +36,7 @@ export async function getNextModule(
     .select('module_id')
     .eq('user_id', userId)
 
-  const completedIds = completedRows?.map((r) => r.module_id) ?? []
+  const completedIds = completedRows?.map((r: { module_id: string }) => r.module_id) ?? []
 
   // Step 3: Query for the best matching module
   // Target difficulty = current level + 1 (capped at 5)
