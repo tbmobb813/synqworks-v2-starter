@@ -161,10 +161,76 @@ export interface SystemInsights {
   next_milestone: string
 }
 
+export interface KPIStats {
+  total_xp: number
+  simulations_completed: number
+  avg_competency: number
+  skills_at_risk: number
+}
+
+export interface RiskSkill {
+  skill_name: string
+  category: string
+  score: number
+}
+
+export interface SkillBreakdownItem {
+  skill_id: string
+  skill_name: string
+  category: string
+  score: number
+  risk_level: 'critical' | 'at_risk' | 'developing' | 'proficient'
+}
+
+export interface RecentActivityItem {
+  id: string
+  scenario_title: string
+  outcome_label: string
+  xp_earned: number
+  completed_at: string
+}
+
+export interface CertificationProgress {
+  id: string
+  name: string
+  description: string | null
+  badge_color: string
+  threshold: number
+  total_skills: number
+  skills_met: number
+  percent_complete: number
+  skill_scores: { skill_name: string; score: number; met: boolean }[]
+}
+
+export interface AssessmentHistoryPoint {
+  completed_at: string
+  avg_score: number
+  skill_scores: Record<string, number>
+}
+
+export interface MandatoryTraining {
+  module_id: string
+  title: string
+  skill_name: string
+  difficulty: number
+  estimated_mins: number
+  due_date: string | null
+  is_completed: boolean
+  days_remaining: number | null
+  is_overdue: boolean
+}
+
 export interface DashboardData {
   radar_data: RadarDataPoint[]
   recommended_module: RecommendedModule | null
   system_insights: SystemInsights
+  kpi_stats: KPIStats
+  risk_register: RiskSkill[]
+  skill_breakdown: SkillBreakdownItem[]
+  recent_activity: RecentActivityItem[]
+  certifications: CertificationProgress[]
+  assessment_history: AssessmentHistoryPoint[]
+  mandatory_trainings: MandatoryTraining[]
 }
 
 // --- After Action Report ---

@@ -7,6 +7,14 @@ import { ArrowRight, Clock, Zap } from 'lucide-react'
 import { LogOut } from 'lucide-react'
 import { useUserStore } from '@/lib/store/useUserStore'
 import { SkillRadar } from '@/components/charts/SkillRadar'
+import KPIStrip from '@/components/dashboard/KPIStrip'
+import ComplianceRiskRegister from '@/components/dashboard/ComplianceRiskRegister'
+import SkillBreakdownTable from '@/components/dashboard/SkillBreakdownTable'
+import RecentActivityFeed from '@/components/dashboard/RecentActivityFeed'
+import CertificationProgressCard from '@/components/dashboard/CertificationProgressCard'
+import AssessmentHistoryChart from '@/components/dashboard/AssessmentHistoryChart'
+import MandatoryTrainingTracker from '@/components/dashboard/MandatoryTrainingTracker'
+import EnterpriseComingSoon from '@/components/dashboard/EnterpriseComingSoon'
 import type { DashboardData } from '@/types'
 
 export default function DashboardClient({ initialData }: { initialData: DashboardData | null }) {
@@ -47,6 +55,11 @@ export default function DashboardClient({ initialData }: { initialData: Dashboar
           <LogOut size={14} /> Sign out
         </button>
       </div>
+
+      {/* KPI Stat Strip */}
+      {useData?.kpi_stats && !isLoading && (
+        <KPIStrip stats={useData.kpi_stats} />
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
         <div className="lg:col-span-3 bg-white border border-zinc-200 rounded-xl p-6">
@@ -98,6 +111,43 @@ export default function DashboardClient({ initialData }: { initialData: Dashboar
           <button onClick={() => router.push('/diagnostic')} className="w-full border border-zinc-200 bg-white hover:border-zinc-400 rounded-xl py-4 text-xs font-mono text-zinc-500 hover:text-zinc-800 uppercase tracking-widest transition-all duration-150 cursor-pointer">Retake diagnostic</button>
         </div>
       </div>
+
+      {/* Compliance Risk Register + Recent Activity */}
+      {useData && !isLoading && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <ComplianceRiskRegister risks={useData.risk_register} />
+          <RecentActivityFeed activities={useData.recent_activity} />
+        </div>
+      )}
+
+      {/* Certification Progress + Mandatory Training */}
+      {useData && !isLoading && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <CertificationProgressCard certifications={useData.certifications} />
+          <MandatoryTrainingTracker trainings={useData.mandatory_trainings} />
+        </div>
+      )}
+
+      {/* Assessment History */}
+      {useData && !isLoading && (
+        <div className="mt-6">
+          <AssessmentHistoryChart history={useData.assessment_history} />
+        </div>
+      )}
+
+      {/* Skill Breakdown Table */}
+      {useData?.skill_breakdown && !isLoading && (
+        <div className="mt-6">
+          <SkillBreakdownTable skills={useData.skill_breakdown} />
+        </div>
+      )}
+
+      {/* Enterprise / Org Features — Coming Soon */}
+      {!isLoading && (
+        <div className="mt-6">
+          <EnterpriseComingSoon />
+        </div>
+      )}
     </>
   )
 }
