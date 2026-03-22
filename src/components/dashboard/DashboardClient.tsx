@@ -37,19 +37,20 @@ export default function DashboardClient({ initialData }: { initialData: Dashboar
   return (
     <>
       {/* Header */}
-      <div className="mb-12">
-        <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-2">SynqWorks</p>
-        <h1 className="text-3xl font-black text-zinc-900 tracking-tight">Leadership blueprint</h1>
-          <div className="ml-4">
-            <button onClick={async () => { await signOut(); router.push('/login') }} title="Sign out" className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-800">
-              <LogOut size={14} /> Sign out
-            </button>
-          </div>
-        {insights && !isLoading && <p className="text-sm text-zinc-500 mt-2 font-mono">{insights.trend} · Next: {insights.next_milestone}</p>}
+      <div className="flex items-start justify-between mb-8">
+        <div>
+          <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-1">SynqWorks</p>
+          <h1 className="text-2xl font-black text-zinc-900 tracking-tight">Leadership blueprint</h1>
+          {insights && !isLoading && <p className="text-sm text-zinc-500 mt-1 font-mono">{insights.trend} · Next: {insights.next_milestone}</p>}
+        </div>
+        <button onClick={async () => { await signOut(); router.push('/login') }} title="Sign out" className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-800 mt-1">
+          <LogOut size={14} /> Sign out
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-3 bg-white border border-zinc-200 rounded-xl p-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+        <div className="lg:col-span-3 bg-white border border-zinc-200 rounded-xl p-6">
+          <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-4">Competency blueprint</p>
           <SkillRadar data={useData?.radar_data ?? []} isLoading={isLoading} />
         </div>
 
