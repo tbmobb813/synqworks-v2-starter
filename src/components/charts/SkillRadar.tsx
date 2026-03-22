@@ -16,7 +16,16 @@ interface SkillRadarProps {
   isLoading?: boolean
 }
 
-const CustomTooltip = ({ active, payload }: unknown) => {
+const SHORT_LABELS: Record<string, string> = {
+  'People Operations': 'People Ops',
+  'Conflict Resolution': 'Conflict Res.',
+  'Regulatory Compliance': 'Compliance',
+  'Strategic Budgeting': 'Budgeting',
+  'DEI Strategy': 'DEI',
+  'HR Tech Fluency': 'HR Tech',
+}
+
+const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: { payload: RadarDataPoint }[] }) => {
   if (!active || !payload?.length) return null
   const d = payload[0].payload as RadarDataPoint
   return (
@@ -80,6 +89,7 @@ export function SkillRadar({ data, isLoading }: SkillRadarProps) {
               fontFamily: 'monospace',
               fontWeight: 500,
             }}
+            tickFormatter={(value) => SHORT_LABELS[value as string] ?? (value as string)}
           />
           <PolarRadiusAxis
             angle={90}

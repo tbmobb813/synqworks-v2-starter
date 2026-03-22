@@ -116,7 +116,7 @@ values
   'An employee claims their manager is micromanaging them. The manager says the employee is unreliable. Both feel wronged.',
   null,
   '[
-    {"label": "Tell the employee to toughen up — management is hard.", "score": 1, "explanation": "Dismissing the employee's concern destroys psychological safety and signals HR is not a safe resource."},
+    {"label": "Tell the employee to toughen up — management is hard.", "score": 1, "explanation": "Dismissing the employee''s concern destroys psychological safety and signals HR is not a safe resource."},
     {"label": "Transfer the employee to a new team to avoid the conflict.", "score": 2, "explanation": "Transfer without resolution moves the problem, not solves it, and rewards avoidance behavior."},
     {"label": "Monitor their Slack messages for a week to gather evidence.", "score": 1, "explanation": "Covert surveillance is a serious legal and ethical violation regardless of intent."},
     {"label": "Facilitate a structured expectations-alignment session with both parties present.", "score": 5, "explanation": "Correct. A facilitated session with clear outcomes creates mutual accountability and documents the resolution."}
@@ -146,10 +146,10 @@ values
   'A remote employee based in New York requests an ergonomic equipment setup as a reasonable accommodation for a diagnosed back condition. Your HQ is in a state with more lenient requirements.',
   null,
   '[
-    {"label": "Follow your home-state laws since that is where the company is incorporated.", "score": 2, "explanation": "Accommodation obligations are generally determined by the employee's work location, not company HQ."},
+    {"label": "Follow your home-state laws since that is where the company is incorporated.", "score": 2, "explanation": "Accommodation obligations are generally determined by the employee''s work location, not company HQ."},
     {"label": "Deny the request — the budget is tight this quarter.", "score": 1, "explanation": "Denying a documented reasonable accommodation request is an ADA violation regardless of budget conditions."},
     {"label": "Ask the employee to purchase the equipment themselves and submit for reimbursement later.", "score": 3, "explanation": "Shifting the burden to the employee during the accommodation process is a compliance risk and morale issue."},
-    {"label": "Apply the labor laws of the state where the employee resides and consult employment counsel if needed.", "score": 5, "explanation": "Correct. The employee's work location determines which jurisdiction's accommodation laws apply."}
+    {"label": "Apply the labor laws of the state where the employee resides and consult employment counsel if needed.", "score": 5, "explanation": "Correct. The employee''s work location determines which jurisdiction''s accommodation laws apply."}
   ]',
   6
 ),
@@ -239,7 +239,7 @@ values
     {"label": "Build better-looking dashboards in PowerBI using the same underlying data.", "score": 1, "explanation": "Improving presentation without changing the analytical depth adds no decision-making value."},
     {"label": "Automate the existing reports so they go directly to all C-suite executives.", "score": 2, "explanation": "Automating shallow reporting just ensures executives receive low-value data faster."},
     {"label": "Consolidate payroll and performance data into a unified data warehouse.", "score": 3, "explanation": "Data consolidation is a prerequisite for better analytics but is not the strategic goal itself."},
-    {"label": "Shift from descriptive reporting to prescriptive modeling — predicting turnover before it happens.", "score": 5, "explanation": "Correct. Prescriptive analytics transforms HR from a reporter of outcomes to a predictor of risk, which changes HR's seat at the leadership table."}
+    {"label": "Shift from descriptive reporting to prescriptive modeling — predicting turnover before it happens.", "score": 5, "explanation": "Correct. Prescriptive analytics transforms HR from a reporter of outcomes to a predictor of risk, which changes HR''s seat at the leadership table."}
   ]',
   12
 );
@@ -558,7 +558,7 @@ values
             "label": "Agree — it is a reasonable corrective action given the documented pattern.",
             "next_node": "agree",
             "impact": {"trust": -5, "compliance": -15, "budget": 0},
-            "explanation": "A blanket quota-based promotion policy creates legal exposure and can undermine the promoted person's credibility."
+            "explanation": "A blanket quota-based promotion policy creates legal exposure and can undermine the promoted person''s credibility."
           },
           {
             "label": "Push back and propose an audit of why women are not reaching the VP pipeline instead.",
@@ -567,7 +567,7 @@ values
             "explanation": "Correct. Fixing the pipeline root cause is more durable and legally defensible than a one-off corrective promotion."
           },
           {
-            "label": "Do nothing — promotion decisions are outside HR's authority.",
+            "label": "Do nothing — promotion decisions are outside HR''s authority.",
             "next_node": "END",
             "impact": {"trust": -20, "compliance": -10, "budget": 0},
             "explanation": "HR has both the authority and obligation to flag discriminatory patterns in promotion outcomes."
@@ -592,7 +592,7 @@ values
         ]
       },
       "agree": {
-        "text": "A male candidate who was passed over for the promotion files a discrimination complaint citing the CEO's stated rationale. How do you respond?",
+        "text": "A male candidate who was passed over for the promotion files a discrimination complaint citing the CEO''s stated rationale. How do you respond?",
         "options": [
           {
             "label": "Investigate the complaint seriously and acknowledge the policy error while engaging legal counsel.",
@@ -626,7 +626,7 @@ values
             "label": "Present the 12% number with a breakdown by department and seniority level.",
             "next_node": "descriptive",
             "impact": {"trust": 5, "compliance": 5, "budget": 0},
-            "explanation": "Descriptive reporting is a start but does not answer the CFO's real question: what do we do about it?"
+            "explanation": "Descriptive reporting is a start but does not answer the CFO''s real question: what do we do about it?"
           },
           {
             "label": "Cross-reference engagement scores, compensation percentile, and tenure to identify the highest-risk segments.",
@@ -710,7 +710,7 @@ values
             "label": "Refuse the match — the equity audit makes it too risky right now.",
             "next_node": "match_refused",
             "impact": {"trust": -10, "compliance": 15, "budget": 5},
-            "explanation": "Legally safer but you may lose your top performer and the VP's trust."
+            "explanation": "Legally safer but you may lose your top performer and the VP''s trust."
           },
           {
             "label": "Propose a non-monetary retention package while fast-tracking a company-wide salary band review.",
@@ -816,7 +816,7 @@ values
             "label": "Tell them both to submit their proposals to the CEO for a final decision.",
             "next_node": "END",
             "impact": {"trust": -5, "compliance": 0, "budget": 0},
-            "explanation": "Pushing to the CEO is an escalation, not a resolution. It avoids the conflict rather than developing the leaders' ability to navigate it."
+            "explanation": "Pushing to the CEO is an escalation, not a resolution. It avoids the conflict rather than developing the leaders'' ability to navigate it."
           }
         ]
       },
@@ -827,7 +827,7 @@ values
             "label": "Send direct messages to both leaders immediately and request an urgent private meeting.",
             "next_node": "END",
             "impact": {"trust": 0, "compliance": 5, "budget": 0},
-            "explanation": "Recovery is possible but the public post has already reduced HR's perceived authority in this situation."
+            "explanation": "Recovery is possible but the public post has already reduced HR''s perceived authority in this situation."
           }
         ]
       }

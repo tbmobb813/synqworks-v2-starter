@@ -4,28 +4,30 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, Clock, Zap } from 'lucide-react'
+import { LogOut } from 'lucide-react'
+import { useUserStore } from '@/lib/store/useUserStore'
 import { SkillRadar } from '@/components/charts/SkillRadar'
 import type { DashboardData } from '@/types'
 
 export default function DashboardClient({ initialData }: { initialData: DashboardData | null }) {
   const router = useRouter()
-  const [data, setData] = useState<DashboardData | null>(initialData)
+  const [data] = useState<DashboardData | null>(initialData)
+  const signOut = useUserStore(s => s.signOut)
 
-  const queryOptions: any = {
+  const { data: queryData, isLoading, error } = useQuery<DashboardData | null>({
     queryKey: ['dashboard'],
     queryFn: async () => {
       const res = await fetch('/api/recommend')
+      if (res.status === 401) return null
       if (!res.ok) throw new Error('Failed to load')
       return res.json() as Promise<DashboardData>
     },
     initialData: data ?? undefined,
-    onSuccess: (d: DashboardData) => setData(d),
     staleTime: 1000 * 60 * 5,
-  }
+    retry: false,
+  })
 
-  const { data: queryData, isLoading, error } = useQuery(queryOptions)
-
-  const useData = (queryData ?? data) as DashboardData | null
+  const useData = queryData ?? data
 
   if (error) return <div className="min-h-screen flex items-center justify-center"><p className="text-sm font-mono text-rose-500">Failed to load dashboard.</p></div>
 
@@ -38,6 +40,11 @@ export default function DashboardClient({ initialData }: { initialData: Dashboar
       <div className="mb-12">
         <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mb-2">SynqWorks</p>
         <h1 className="text-3xl font-black text-zinc-900 tracking-tight">Leadership blueprint</h1>
+          <div className="ml-4">
+            <button onClick={async () => { await signOut(); router.push('/login') }} title="Sign out" className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-800">
+              <LogOut size={14} /> Sign out
+            </button>
+          </div>
         {insights && !isLoading && <p className="text-sm text-zinc-500 mt-2 font-mono">{insights.trend} · Next: {insights.next_milestone}</p>}
       </div>
 
