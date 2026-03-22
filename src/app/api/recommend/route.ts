@@ -168,7 +168,7 @@ export async function GET() {
   // System insights
   const sortedByScore = [...userProgress].sort((a, b) => a.competency_score - b.competency_score)
   const criticalGap = sortedByScore[0]
-  const criticalSkill = skills.find((s) => s.id === criticalGap?.skill_id)
+  const criticalSkill = criticalGap ? skills.find((s) => s.id === criticalGap.skill_id) : null
 
   const system_insights = criticalSkill
     ? {
@@ -177,11 +177,12 @@ export async function GET() {
         trend: 'Tracking leadership growth',
         next_milestone: recommended_module?.title ?? 'Complete an assessment',
       }
-    : null
-
-  if (!system_insights) {
-    return NextResponse.json(null, { status: 200 })
-  }
+    : {
+        primary_gap: 'No data yet',
+        primary_gap_score: 0,
+        trend: 'Take the diagnostic to begin',
+        next_milestone: 'Complete an assessment',
+      }
 
   const body: DashboardData = {
     radar_data,

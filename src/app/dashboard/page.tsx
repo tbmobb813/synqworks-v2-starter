@@ -152,16 +152,24 @@ async function getDashboardData(): Promise<DashboardData | null> {
     // System insights
     const sortedByScore = [...userProgress].sort((a, b) => a.competency_score - b.competency_score)
     const criticalGap = sortedByScore[0]
-    const criticalSkill = skills.find((s) => s.id === criticalGap?.skill_id)
+    const criticalSkill = criticalGap ? skills.find((s) => s.id === criticalGap.skill_id) : null
 
-    if (!criticalSkill) return null
+    const system_insights: DashboardData['system_insights'] = criticalSkill
+      ? {
+          primary_gap: criticalSkill.name,
+          primary_gap_score: criticalGap.competency_score,
+          trend: 'Tracking leadership growth',
+          next_milestone: recommended_module?.title ?? 'Complete an assessment',
+        }
+      : {
+          primary_gap: 'No data yet',
+          primary_gap_score: 0,
+          trend: 'Take the diagnostic to begin',
+          next_milestone: 'Complete an assessment',
+        }
 
     return {
-      radar_data, recommended_module,
-      system_insights: {
-        primary_gap: criticalSkill.name, primary_gap_score: criticalGap.competency_score,
-        trend: 'Tracking leadership growth', next_milestone: recommended_module?.title ?? 'Complete an assessment',
-      },
+      radar_data, recommended_module, system_insights,
       kpi_stats, risk_register, skill_breakdown, recent_activity,
       certifications, assessment_history, mandatory_trainings,
     }
