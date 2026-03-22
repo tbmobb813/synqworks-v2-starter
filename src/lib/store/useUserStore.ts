@@ -5,6 +5,7 @@ import type { User } from '@supabase/supabase-js'
 interface UserStore {
   user: User | null
   isLoading: boolean
+  init: () => Promise<void>
   fetchUser: () => Promise<void>
   signOut: () => Promise<void>
 }
@@ -13,7 +14,7 @@ export const useUserStore = create<UserStore>((set) => ({
   user: null,
   isLoading: true,
 
-  fetchUser: async () => {
+  init: async () => {
     const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     set({ user, isLoading: false })
@@ -22,6 +23,12 @@ export const useUserStore = create<UserStore>((set) => ({
     supabase.auth.onAuthStateChange((_event, session) => {
       set({ user: session?.user ?? null, isLoading: false })
     })
+  },
+
+  fetchUser: async () => {
+    const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    set({ user, isLoading: false })
   },
 
   signOut: async () => {

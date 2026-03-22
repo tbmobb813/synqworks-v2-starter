@@ -74,7 +74,7 @@ export async function getNextModule(
   return {
     id: data.id,
     skill_id: data.skill_id,
-    skill_name: (data.skills as { name: string }).name,
+    skill_name: (data.skills as unknown as { name: string }).name,
     title: data.title,
     description: data.description,
     difficulty: data.difficulty,
